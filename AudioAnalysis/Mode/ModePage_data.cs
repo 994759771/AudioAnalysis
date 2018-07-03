@@ -15,13 +15,13 @@ namespace AudioAnalysis.Mode
 	/// </summary>
 	public class ModePage_data
 	{
-		public int cid;
-		public int page;
+		public long cid;
+		public long page;
 		public string from;
 		public string part;
 		public string vid;
 		public bool has_alias;
 		public string weblink;
-		public int tid;
+		public long tid;
 	}
 }

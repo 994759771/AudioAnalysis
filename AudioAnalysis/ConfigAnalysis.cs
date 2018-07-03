@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using AudioAnalysis.Mode;
 
 namespace AudioAnalysis
 {
@@ -21,12 +22,16 @@ namespace AudioAnalysis
 		public List<VideoInfo> GetVideoInfo(string VideoRootPath){
 			
 			List<VideoInfo> VideoInfoList=new List<VideoInfo>();
+			JsonAnalysis jal=new JsonAnalysis();
+			ModeEntry me=null;
 			
 			if (VideoRootPath!=null) {
 				string[] path=Directory.GetDirectories(VideoRootPath);			   
 			    for (int i = 0; i < path.Length; i++) {
 				VideoInfo temp=new VideoInfo();
 				temp.videoPath=path[i]+@"\lua.flv.bili2api.80";
+				me=jal.GetJsonConfig(path[i]);
+				temp.videoName=me.page_data.part;
 				VideoInfoList.Add(temp);
 			    }
 			  

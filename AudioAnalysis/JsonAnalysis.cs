@@ -19,7 +19,7 @@ namespace AudioAnalysis
 	/// </summary>
 	public class JsonAnalysis
 	{
-		ModeEntry GetJsonConfig(string videoPath){
+		public ModeEntry GetJsonConfig(string videoPath){
 			ModeEntry me=new ModeEntry();
 			try {
 				string entryPath=videoPath+@"\entry.json";

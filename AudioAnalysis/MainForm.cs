@@ -44,7 +44,7 @@ namespace AudioAnalysis
 		}
 		void BtnStartClick(object sender, EventArgs e)
 		{
-			CA.GetVideoInfo(pa.videoRootPath);
+			List<VideoInfo> v= CA.GetVideoInfo(pa.videoRootPath);
 		}
 		
 	}

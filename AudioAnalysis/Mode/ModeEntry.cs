@@ -16,20 +16,20 @@ namespace AudioAnalysis.Mode
 	public class ModeEntry
 	{
 		public bool is_completed;
-		public int total_bytes;
-		public int downloade_bytes;
+		public long total_bytes;
+		public long downloade_bytes;
 		public string title;
 		public string type_tag;
 		public string cover;
-		public int prefered_video_quality;
-		public int guessed_total_bytes;
-		public int total_time_milli;
-		public int danmaku_count;
-		public int time_update_stamp;
-		public int time_create_stamp;
-		public int avid;
-		public int spid;
-		public int seasion_id;
+		public long prefered_video_quality;
+		public long guessed_total_bytes;
+		public long total_time_milli;
+		public long danmaku_count;
+		public long time_update_stamp;
+		public long time_create_stamp;
+		public long avid;
+		public long spid;
+		public long seasion_id;
 		public ModePage_data page_data;
 	}
 }
