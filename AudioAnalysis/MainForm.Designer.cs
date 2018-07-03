@@ -2,18 +2,19 @@
  * Created by SharpDevelop.
  * User: Administrator
  * Date: 2018/7/3
- * Time: 10:25
+ * Time: 10:33
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 namespace AudioAnalysis
 {
-	partial class UserControl1
+	partial class MainForm
 	{
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
+		private System.Windows.Forms.Button button1;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -36,11 +37,30 @@ namespace AudioAnalysis
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.button1 = new System.Windows.Forms.Button();
+			this.SuspendLayout();
 			// 
-			// UserControl1
+			// button1
 			// 
+			this.button1.Font = new System.Drawing.Font("宋体", 30F);
+			this.button1.Location = new System.Drawing.Point(167, 78);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(299, 107);
+			this.button1.TabIndex = 0;
+			this.button1.Text = "确认";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.Button1Click);
+			// 
+			// MainForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Name = "UserControl1";
+			this.ClientSize = new System.Drawing.Size(606, 261);
+			this.Controls.Add(this.button1);
+			this.Name = "MainForm";
+			this.Text = "AudioAnalysis";
+			this.ResumeLayout(false);
+
 		}
 	}
 }
