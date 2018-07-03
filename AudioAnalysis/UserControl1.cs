@@ -8,7 +8,6 @@
  */
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -17,6 +16,7 @@ namespace AudioAnalysis
 	/// <summary>
 	/// Description of UserControl1.
 	/// </summary>
+using System.ComponentModel;
 	public partial class UserControl1 : UserControl
 	{
 		public UserControl1()
