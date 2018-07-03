@@ -9,6 +9,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace AudioAnalysis
 {
@@ -18,12 +19,20 @@ namespace AudioAnalysis
 	public class ConfigAnalysis
 	{
 		public List<VideoInfo> GetVideoInfo(string VideoRootPath){
-			string[] path=Directory.GetDirectories(VideoRootPath);
+			
 			List<VideoInfo> VideoInfoList=new List<VideoInfo>();
-			for (int i = 0; i < path.Length; i++) {
+			
+			if (VideoRootPath!=null) {
+				string[] path=Directory.GetDirectories(VideoRootPath);			   
+			    for (int i = 0; i < path.Length; i++) {
 				VideoInfo temp=new VideoInfo();
 				temp.videoPath=path[i]+@"\lua.flv.bili2api.80";
 				VideoInfoList.Add(temp);
+			    }
+			  
+			
+			}else{
+				MessageBox.Show("视频路径为空，请先选择","提示");
 			}
 		
 			return VideoInfoList;

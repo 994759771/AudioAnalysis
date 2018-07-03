@@ -6,3 +6,4 @@ E:\Pro\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.exe
 E:\Pro\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.pdb
 E:\Pro\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.MainForm.resources
 E:\Pro\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.csproj.GenerateResource.Cache
+E:\Pro\AudioAnalysis\AudioAnalysis\bin\Debug\LitJSON.dll
