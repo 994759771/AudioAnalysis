@@ -19,6 +19,7 @@ namespace AudioAnalysis
 	public partial class MainForm : Form
 	{
 		PathAnalysis pa=new PathAnalysis();
+		ConfigAnalysis CA=new ConfigAnalysis();
 		public MainForm()
 		{
 			//
@@ -36,6 +37,14 @@ namespace AudioAnalysis
 		{
 			pa.SetSavePath();
 			this.tbOutPath.Text=pa.videoSavePath;
+		}
+		void BtnOpenFileClick(object sender, EventArgs e)
+		{
+			pa.GetPath();
+		}
+		void BtnStartClick(object sender, EventArgs e)
+		{
+			CA.GetVideoInfo(pa.videoRootPath);
 		}
 		
 	}
