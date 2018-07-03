@@ -1,0 +1,5 @@
+E:\Pro\AudioAnalysis\AudioAnalysis\bin\Debug\AudioAnalysis.dll
+E:\Pro\AudioAnalysis\AudioAnalysis\bin\Debug\AudioAnalysis.pdb
+E:\Pro\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.csprojResolveAssemblyReference.cache
+E:\Pro\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.dll
+E:\Pro\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.pdb
