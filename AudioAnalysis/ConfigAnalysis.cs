@@ -11,6 +11,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using AudioAnalysis.Mode;
+using System.Text;
 
 namespace AudioAnalysis
 {
@@ -42,9 +43,30 @@ namespace AudioAnalysis
 		
 			return VideoInfoList;
 		}
-		void WriteList(){
+		public void WriteList(List<VideoInfo> videoInfo){
+		     try {
+				String sb="";
+				StreamWriter sw=null;
+				for (int i = 0; i < videoInfo.Count; i++) {
+					sw=new StreamWriter(videoInfo[i].videoPath+@"\List.txt",true);
+					string[] temp=Directory.GetFiles(videoInfo[i].videoPath,"*.blv");
+					for (int j = 0; j < temp.Length; j++) {
+						sb="file '"+temp[j].ToString()+" '\n";
+					    sw.WriteLine(sb);
+					}
+				
+					sw.Close();
+					
+				}
+				
+				
+		     } 
+			catch (Exception ex) {
+		     	
+				MessageBox.Show(ex.Message);
+		     }
 		
 		}
-		
+	
 	}
 }

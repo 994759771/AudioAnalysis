@@ -7,3 +7,12 @@ E:\Pro\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.pdb
 E:\Pro\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.MainForm.resources
 E:\Pro\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.csproj.GenerateResource.Cache
 E:\Pro\AudioAnalysis\AudioAnalysis\bin\Debug\LitJSON.dll
+E:\WorkingSpace\HUB\AudioAnalysis\AudioAnalysis\bin\Debug\AudioAnalysis.exe.config
+E:\WorkingSpace\HUB\AudioAnalysis\AudioAnalysis\bin\Debug\AudioAnalysis.exe
+E:\WorkingSpace\HUB\AudioAnalysis\AudioAnalysis\bin\Debug\AudioAnalysis.pdb
+E:\WorkingSpace\HUB\AudioAnalysis\AudioAnalysis\bin\Debug\LitJSON.dll
+E:\WorkingSpace\HUB\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.csprojResolveAssemblyReference.cache
+E:\WorkingSpace\HUB\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.MainForm.resources
+E:\WorkingSpace\HUB\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.csproj.GenerateResource.Cache
+E:\WorkingSpace\HUB\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.exe
+E:\WorkingSpace\HUB\AudioAnalysis\AudioAnalysis\obj\Debug\AudioAnalysis.pdb
