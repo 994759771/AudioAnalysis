@@ -17,6 +17,7 @@ namespace AudioAnalysis
 	{
 		public VideoInfo[] GetVideoInfo(string VideoRootPath){
 		
+			return new VideoInfo[]{};
 		}
 		void WriteList(){
 		
