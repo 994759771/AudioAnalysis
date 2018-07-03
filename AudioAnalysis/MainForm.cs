@@ -18,6 +18,7 @@ namespace AudioAnalysis
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		PathAnalysis pa=new PathAnalysis();
 		public MainForm()
 		{
 			//
@@ -28,6 +29,13 @@ namespace AudioAnalysis
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
+		}
+	
+
+			void BtnOutPathClick(object sender, EventArgs e)
+		{
+			pa.SetSavePath();
+			this.tbOutPath.Text=pa.videoSavePath;
 		}
 		
 	}

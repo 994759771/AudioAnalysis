@@ -20,6 +20,8 @@ namespace AudioAnalysis
 		private System.Windows.Forms.Button btnStart;
 		private System.Windows.Forms.RichTextBox rtbLog;
 		private System.Windows.Forms.Label lbLog;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -49,6 +51,8 @@ namespace AudioAnalysis
 			this.btnStart = new System.Windows.Forms.Button();
 			this.rtbLog = new System.Windows.Forms.RichTextBox();
 			this.lbLog = new System.Windows.Forms.Label();
+			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.SuspendLayout();
 			// 
 			// btnOpenFile
@@ -76,6 +80,7 @@ namespace AudioAnalysis
 			this.btnOutPath.TabIndex = 2;
 			this.btnOutPath.Text = "输出位置";
 			this.btnOutPath.UseVisualStyleBackColor = true;
+			this.btnOutPath.Click += new System.EventHandler(this.BtnOutPathClick);
 			// 
 			// btnStart
 			// 
@@ -102,6 +107,10 @@ namespace AudioAnalysis
 			this.lbLog.TabIndex = 5;
 			this.lbLog.Text = "日志";
 			// 
+			// folderBrowserDialog1
+			// 
+			this.folderBrowserDialog1.SelectedPath = "D:\\";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -119,6 +128,7 @@ namespace AudioAnalysis
 			this.MinimumSize = new System.Drawing.Size(595, 342);
 			this.Name = "MainForm";
 			this.Text = "bilibili视频合并";
+			
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
