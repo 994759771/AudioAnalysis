@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://www.cnblogs.com/linyechengwei/p/3224200.html -->
+<html lang="zh-cn" class=" "><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/bundle-sea.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/bundle-sea-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/linyechengwei/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/linyechengwei/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/linyechengwei/wlwmanifest.xml">
+<script async="" src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/analytics.js"></script><script type="text/javascript" src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/encoder.js"></script><script src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'linyechengwei', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/blog-common.js" type="text/javascript"></script>
+</head>
+<body class=" ">
+<a name="top"></a>
+
+<!--done-->
+<div id="header">
+	
+<!--done-->
+<div class="header">
+	<div class="headerText">
+		<a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/linyechengwei/"><h4>一步一个脚印</h4></a><br>
+		<b>The early bird catches the worm </b>
+	</div>
+</div>
+
+</div>
+
+<div id="mytopmenu">
+	
+		<div id="mylinks"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a> &nbsp;
+<a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/linyechengwei/">首页</a> &nbsp;
+<a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a> &nbsp;
+ &nbsp;
+&nbsp;
+<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a>
+</div>
+		<div id="mystats"><div id="blog_stats">
+随笔-85&nbsp;
+评论-80&nbsp;
+文章-0&nbsp;
+<!--trackbacks-1-->
+</div></div>
+	
+</div>
+<div id="centercontent">
+	
+<div id="post_detail">
+<div class="post">
+	<h1 class="postTitle"><a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/linyechengwei/p/3224200.html">c#按字符串中的数字排序问题</a></h1>
+	<div id="cnblogs_post_body" class="blogpost-body" deep="3"><p>&nbsp;在.net 的framewrok框架中提供的排序方法中，如string.sort() 或ArrayList.Sort()方法。这两个方法对字符串排序时，如果字符串中含有数字，则不会按数字大小排序。如：</p>
+<div>如下有四个字符串，</div>
+<div>&nbsp;ArrayList list =&nbsp;new&nbsp;ArrayList(4);</div>
+<div>&nbsp;List.Add(“aa1”);</div>
+<div>List.Add(“aa100);</div>
+<div>&nbsp;List.Add(“aa10);</div>
+<div>&nbsp;List.Add(“aa2”);</div>
+<div>&nbsp;List.Sort();</div>
+<div>&nbsp;</div>
+<div>我们原意希望排序后的顺序为：</div>
+<div>&nbsp;aa1,aa2,aa10,aa100</div>
+<div>&nbsp;</div>
+<div>可是上面的代码执行后的排序顺序为</div>
+<div>&nbsp;aa1,aa10,aa100,aa2</div>
+<div>&nbsp;</div>
+<div>为了序排序后的效果为我们想要的按字符串中的数值排序，我们必须重写字符串的比较函数。</div>
+<div>代码思路：</div>
+<div>由于比较两个字符串时，是逐个比较字符，先从第一个字符开始比较，取出两个字符串中的第一个字符比较，如果比较结果是大于，则说明第一个字符串大于第二个字符串，如果小于，则说明第一个字符串小于第二字符串，如果等于，则比较两个字符串中的第二个字符。如果比到最后也是相等，则说明两个字符串一样大，如果有一个字符串要多一些字符，则这个字符串在大一些。</div>
+<div>我们改进这个算法：在比较过程中如果发现数字，则先不进行比较，看下一个字符是否为数字，这个取出两个字符串中的数字，按数字的数值大小来进行比较。如果相等再取一个字符进行比较。</div>
+<div>&nbsp;</div>
+<div>如下我的代码：（注：对于上面的例子，由于我们可以利用sort（）函数的另一重载方法。Sort (</div>
+<div align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ms-help://MS.MSDNQTR.v80.en/MS.MSDN.v80/MS.NETDEVFX.v20.en/cpref2/html/T_System_Collections_IComparer.htm">IComparer</a>&nbsp;<em>comparer</em></div>
+<div>)）</div>
+<div>故我们只需要写一个继承自Icomparer接口的比较类，即可。</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #808080;">    ///</span><span style="color: #808080;">&lt;summary&gt;</span>
+    <span style="color: #808080;">///</span><span style="color: #008000;">主要用于文件名的比较。
+    </span><span style="color: #808080;">///</span><span style="color: #808080;">&lt;/summary&gt;</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> FilesNameComparerClass : IComparer
+    {
+       </span><span style="color: #008000;">//</span><span style="color: #008000;"> Calls CaseInsensitiveComparer.Compare with the parameters reversed.</span>
+       <span style="color: #808080;">///</span><span style="color: #808080;">&lt;summary&gt;</span>
+       <span style="color: #808080;">///</span><span style="color: #008000;">比较两个字符串，如果含用数字，则数字按数字的大小来比较。
+       </span><span style="color: #808080;">///</span><span style="color: #808080;">&lt;/summary&gt;</span>
+       <span style="color: #808080;">///</span><span style="color: #808080;">&lt;param name="x"&gt;&lt;/param&gt;</span>
+       <span style="color: #808080;">///</span><span style="color: #808080;">&lt;param name="y"&gt;&lt;/param&gt;</span>
+       <span style="color: #808080;">///</span><span style="color: #808080;">&lt;returns&gt;&lt;/returns&gt;</span>
+       <span style="color: #0000ff;">int</span><span style="color: #000000;"> IComparer.Compare( Object x, Object y )
+       {
+           </span><span style="color: #0000ff;">if</span>(x==<span style="color: #0000ff;">null</span>||y==<span style="color: #0000ff;">null</span><span style="color: #000000;">)
+              </span><span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span> ArgumentException(<span style="color: #800000;">"</span><span style="color: #800000;">Parameters can't be null</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+           </span><span style="color: #0000ff;">string</span> fileA = x <span style="color: #0000ff;">as</span> <span style="color: #0000ff;">string</span><span style="color: #000000;">;
+           </span><span style="color: #0000ff;">string</span> fileB = y <span style="color: #0000ff;">as</span> <span style="color: #0000ff;">string</span><span style="color: #000000;">;
+           </span><span style="color: #0000ff;">char</span>[] arr1   =<span style="color: #000000;">   fileA.ToCharArray();
+           </span><span style="color: #0000ff;">char</span>[] arr2 =<span style="color: #000000;"> fileB.ToCharArray();
+           </span><span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>, j =<span style="color: #800080;">0</span><span style="color: #000000;">;
+           </span><span style="color: #0000ff;">while</span>( i &lt; arr1.Length &amp;&amp; j &lt;<span style="color: #000000;"> arr2.Length)
+           {
+              </span><span style="color: #0000ff;">if</span> ( <span style="color: #0000ff;">char</span>.IsDigit( arr1[i]) &amp;&amp; <span style="color: #0000ff;">char</span><span style="color: #000000;">.IsDigit( arr2[j] ) )
+              {
+                  </span><span style="color: #0000ff;">string</span> s1 = <span style="color: #800000;">""</span>,s2 = <span style="color: #800000;">""</span><span style="color: #000000;">;
+                  </span><span style="color: #0000ff;">while</span> ( i &lt; arr1.Length &amp;&amp; <span style="color: #0000ff;">char</span><span style="color: #000000;">.IsDigit( arr1[i]) )
+                  {
+                     s1 </span>+=<span style="color: #000000;"> arr1[i];
+                     i</span>++<span style="color: #000000;">;
+                  }
+                  </span><span style="color: #0000ff;">while</span> (j &lt; arr2.Length &amp;&amp; <span style="color: #0000ff;">char</span><span style="color: #000000;">.IsDigit( arr2[j] ))
+                  {
+                     s2 </span>+=<span style="color: #000000;"> arr2[j];
+                     j</span>++<span style="color: #000000;">;
+                  }
+                  </span><span style="color: #0000ff;">if</span> ( <span style="color: #0000ff;">int</span>.Parse( s1 ) &gt; <span style="color: #0000ff;">int</span><span style="color: #000000;">.Parse( s2) )
+                  {
+                     </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">1</span><span style="color: #000000;">;
+                  }
+                  </span><span style="color: #0000ff;">if</span> ( <span style="color: #0000ff;">int</span>.Parse( s1 ) &lt; <span style="color: #0000ff;">int</span><span style="color: #000000;">.Parse( s2) )
+                  {
+                     </span><span style="color: #0000ff;">return</span> -<span style="color: #800080;">1</span><span style="color: #000000;">;
+                  }
+              }
+              </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+              {
+                  </span><span style="color: #0000ff;">if</span> ( arr1[i] &gt;<span style="color: #000000;"> arr2[j] )
+                  {
+                     </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">1</span><span style="color: #000000;">;
+                  }
+                  </span><span style="color: #0000ff;">if</span> ( arr1[i] &lt;<span style="color: #000000;"> arr2[j] )
+                  {
+                     </span><span style="color: #0000ff;">return</span> -<span style="color: #800080;">1</span><span style="color: #000000;">;
+                  }
+                  i</span>++<span style="color: #000000;">;
+                  j</span>++<span style="color: #000000;">;
+              }
+           }
+           </span><span style="color: #0000ff;">if</span> ( arr1.Length ==<span style="color: #000000;"> arr2.Length )
+           {
+              </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+           }
+           </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+           {
+              </span><span style="color: #0000ff;">return</span> arr1.Length &gt; arr2.Length? <span style="color: #800080;">1</span>: -<span style="color: #800080;">1</span><span style="color: #000000;">;
+           }
+           </span><span style="color: #008000;">//</span><span style="color: #008000;">            return string.Compare( fileA, fileB );
+           </span><span style="color: #008000;">//</span><span style="color: #008000;">            return( (new CaseInsensitiveComparer()).Compare( y, x ) );</span>
+<span style="color: #000000;">       }
+    }
+ 调用时的代码如下：
+IComparer fileNameComparer </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> FilesNameComparerClass();
+List.Sort( fileNameComparer );
+这样排序后的字符串就为按字符串中的数值排序了,为：
+aa1,aa2,aa10,aa100</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(3224200,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;743b420b-63cf-dd11-9e4d-001cf0cd104b&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/linyechengwei/" target="_blank"><img src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/u33813.jpg" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/linyechengwei/">凡夫·俗子</a><br>
+            <a href="http://home.cnblogs.com/u/linyechengwei/followees">关注 - 12</a><br>
+            <a href="http://home.cnblogs.com/u/linyechengwei/followers">粉丝 - 24</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;743b420b-63cf-dd11-9e4d-001cf0cd104b&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(3224200,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">1</span>
+    </div>
+    <div class="buryit" onclick="votePost(3224200,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">1</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/linyechengwei/archive/2012/07/18/2596946.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/linyechengwei/archive/2012/07/18/2596946.html" title="发布于2012-07-18 10:31">Response对象的AppendToLog方法</a><br><a href="http://www.cnblogs.com/linyechengwei/p/3331025.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/linyechengwei/p/3331025.html" title="发布于2013-09-21 09:57">解决getJSON跨域登录Session丢失的问题</a><br></div>
+</div>
+
+
+	<div class="postDesc">posted on <span id="post-date">2013-07-30 00:27</span> <a href="http://www.cnblogs.com/linyechengwei/">凡夫·俗子</a> 阅读(<span id="post_view_count">11550</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3224200" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/linyechengwei/p/3224200.html#" onclick="AddToWz(3224200);return false;">收藏</a></div>
+</div>
+<script type="text/javascript">var allowComments=true,cb_blogId=37375,cb_entryId=3224200,cb_blogApp=currentBlogApp,cb_blogUserGuid='743b420b-63cf-dd11-9e4d-001cf0cd104b',cb_entryCreatedDate='2013/7/30 0:27:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/linyechengwei/p/3224200.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/linyechengwei/p/3224200.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型组态工控、电力仿真CAD与GIS源码库！</a><br><a href="https://cloud.tencent.com/act/campus/group/index?fromSource=gwzcw.1087490.1087490.1087490" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-T2-腾讯云&#39;)">【福利】校园拼团福利，腾讯云1核2G云服务器10元/月！</a><br><a href="http://challenge.xfyun.cn/?ch=bk" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-xfyun&#39;)">【大赛】2018首届“顶天立地”AI开发者大赛</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://dnspod.cloud.tencent.com/act/yearendsales?from=IT&amp;fromSource=gwzcw.1087492.1087492.1087492" target="_blank"><img width="300" height="250" src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/24442-20180702115226334-1185241560.jpg" alt="qcloud0702" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C1&#39;);"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/600910/" target="_blank">外媒：百度将在2019年初在日本推出自驾迷你巴士</a><br> ·  <a href="https://news.cnblogs.com/n/600909/" target="_blank">硅谷圈内人爆料：科技公司想方设法让用户对技术上瘾</a><br> ·  <a href="https://news.cnblogs.com/n/600908/" target="_blank">Alphabet运输领域野心彰显 借投资打造未来“交通巨头”</a><br> ·  <a href="https://news.cnblogs.com/n/600906/" target="_blank">摩拜单车宣布将在全国实行零门槛免押 发布摩拜助力车</a><br> ·  <a href="https://news.cnblogs.com/n/600907/" target="_blank">《我不是药神》大热 阿里影业大涨12% 北京文化连续3日涨停</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/9667/" target="_blank"><img src="./c#按字符串中的数字排序问题 - 凡夫·俗子 - 博客园_files/TB1iQKbhqmWBuNjy1XaXXXCbXXa-468-60.jpg" alt="" style="width: 468px; height: 60px;"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/599854/" target="_blank">从Excel到微服务</a><br> ·  <a href="http://kb.cnblogs.com/page/522513/" target="_blank">如何提升你的能力？给年轻程序员的几条建议</a><br> ·  <a href="http://kb.cnblogs.com/page/553361/" target="_blank">程序员的那些反模式</a><br> ·  <a href="http://kb.cnblogs.com/page/598335/" target="_blank">程序员的宇宙时间线</a><br> ·  <a href="http://kb.cnblogs.com/page/597877/" target="_blank">突破程序员思维</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div id="leftcontent">
+	
+		<div id="leftcontentcontainer">
+			
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script><br>
+			<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/linyechengwei/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/linyechengwei/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/linyechengwei/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/linyechengwei/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/linyechengwei/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<h3 class="catListTitle">我的标签</h3>
+<div id="MyTag">
+<ul>
+<li><a href="http://www.cnblogs.com/linyechengwei/tag/Asp.net/">Asp.net</a>(17)</li><li><a href="http://www.cnblogs.com/linyechengwei/tag/sql/">sql</a>(8)</li><li><a href="http://www.cnblogs.com/linyechengwei/tag/jquery/">jquery</a>(6)</li><li><a href="http://www.cnblogs.com/linyechengwei/tag/js/">js</a>(5)</li><li><a href="http://www.cnblogs.com/linyechengwei/tag/validate/">validate</a>(3)</li><li><a href="http://www.cnblogs.com/linyechengwei/tag/gridview/">gridview</a>(2)</li><li><a href="http://www.cnblogs.com/linyechengwei/tag/mvc/">mvc</a>(2)</li><li><a href="http://www.cnblogs.com/linyechengwei/tag/ajax/">ajax</a>(2)</li><li><a href="http://www.cnblogs.com/linyechengwei/tag/div/">div</a>(2)</li><li><a href="http://www.cnblogs.com/linyechengwei/tag/excel/">excel</a>(2)</li><li><a href="http://www.cnblogs.com/linyechengwei/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+		<h3 class="catListTitle">ASP.NET C#</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_0" class="listitem" href="https://www.cnblogs.com/seven911/default.html?OnlyTitle=1" rel="nofollow">.net操作Oracle</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_1" class="listitem" href="http://blog.csdn.net/mengyao/archive/2007/03/14/1528557.aspx" target="_blank">ASP.net 2.0资料吐血收藏（^_^）收藏</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_2" class="listitem" href="http://www.webdiyer.com/download/default.aspx" rel="nofollow">AspNetPager下载</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_3" class="listitem" href="http://topic.csdn.net/u/20070321/10/498a38fe-f071-46f4-adb2-855044b30193.html" rel="nofollow" target="_blank">C#获取硬盘编号、CPU编号及类型、内存大小及使用情况</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_4" class="listitem" href="http://www.codeplex.com/" rel="nofollow">codeplex</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_5" class="listitem" href="http://www.coolcode.cn/show-254-1.html" rel="nofollow">JavaScript 面向对象程序设计（上）——封装</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_6" class="listitem" href="http://blog.joycode.com/scottgu/archive/2008/09/29/115287.aspx">jquery-ms</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_7" class="listitem" href="http://tech.ddvip.com/2009-01/1231922206105845.html" rel="nofollow">开源客户关系管理系统SplendidCRM下的二次开发</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_8" class="listitem" href="http://www.cssrain.cn/" rel="nofollow">前端技术</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_9" class="listitem" href="http://www4.it168.com/jtzt/shenlan/tech/enterprise_library/index.html" rel="nofollow" target="_blank">微软企业库</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_10" class="listitem" href="http://www.antardev.cn/showArticle.aspx?id=84" rel="nofollow">用于ASP.NET2.0的进度条控件(实时)</a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">NBear学习</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_0" class="listitem" href="http://www.codeplex.com/nbear" rel="nofollow" target="_blank">下载NBearV3最新版本</a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">SharePoint学习链接</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_2_Link_0" class="listitem" href="http://blog.joycode.com/kaneboy/archive/2006/11/19/87192.aspx" target="_blank">DelegateControl：SharePoint Server 2007内置的一个"用户控件包装器"</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_2_Link_1" class="listitem" href="http://taglib.cn/story/221" rel="nofollow" target="_blank">将你的Asp.NET应用程序嵌入到SharePoint</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_2_Link_2" class="listitem" href="http://taglib.cn/story/292" rel="nofollow" target="_blank">将你的Asp.NET应用程序嵌入到SharePoint(续)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_2_Link_3" class="listitem" href="http://www.eallies.com/" rel="nofollow" target="_blank">易联工作室</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_2_Link_4" class="listitem" href="https://www.cnblogs.com/blusehuang/archive/2007/06/26/796546.html" target="_blank">在Web Part中使用User Control </a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">SQL</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_3_Link_0" class="listitem" href="http://hi.baidu.com/dolet/blog/item/384d882f249fe23a1f3089a8.html" rel="nofollow" target="_blank">如何用SQL语句为数据库表列添加描述</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_3_Link_1" class="listitem" href="http://www.pconline.com.cn/pcedu/empolder/db/access/0310/226080.html" rel="nofollow" target="_blank">在 Access 中使用“存储过程”</a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">英语学习</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_4_Link_0" class="listitem" href="http://blog.csdn.net/carefree31441/archive/2008/07/10/2635411.aspx" target="_blank">经典英语句子</a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">杂项</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_5_Link_0" class="listitem" href="http://blog.csdn.net/zdg/archive/2007/03/26/1541677.aspx" target="_blank">2007年第12周最热网友收藏</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_5_Link_1" class="listitem" href="http://www.yscode.com/article/server/428.html" rel="nofollow">花生壳的安装和使用</a></li>
+			
+				</ul>
+			
+	
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<h3>积分与排名</h3>
+<ul>
+	<li>
+		积分 -
+		66533
+	</li><li>
+		排名 -
+		5815
+	</li>
+</ul>
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<h3 class="catListTitle">最新评论</h3>
+<div class="RecentComment" id="RecentComments">
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/linyechengwei/archive/2011/02/24/1963874.html#3584239">1. Re:在RDLC报表中添加链接</a></li>
+        <li class="recent_comment_body">博主，请问如果= "javascript:viewinfo(" &amp; Fields!ActivityID.Value &amp; ")"中参数带有中文的话，rdlc会自动将其进行一次URL编码，然后如果是使用I......</li>
+        <li class="recent_comment_author">--好人卡收藏家</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/linyechengwei/archive/2009/11/18/1605377.html#3533398">2. Re:Asp.Net异常:"由于代码已经过优化或者本机框架位于调用堆栈之上,无法计算表达式的值"的解决方法</a></li>
+        <li class="recent_comment_body">学习了。谢谢</li>
+        <li class="recent_comment_author">--一朵茉莉花</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/linyechengwei/archive/2010/06/14/1758337.html#3507378">3. Re:C# Datatable排序</a></li>
+        <li class="recent_comment_body">正好用到,多谢</li>
+        <li class="recent_comment_author">--songyulan</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/linyechengwei/archive/2010/06/14/1758337.html#3463735">4. Re:C# Datatable排序</a></li>
+        <li class="recent_comment_body">感谢楼主,帮了我的忙.</li>
+        <li class="recent_comment_author">--南宫萧尘</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/linyechengwei/archive/2010/06/14/1758337.html#3442703">5. Re:C# Datatable排序</a></li>
+        <li class="recent_comment_body">@tiasys@tiasys引用//按标题升序排列 dt.DefaultView.Sort="title asc"; DataTable dtSort = ......</li>
+        <li class="recent_comment_author">--东辰潋（it猪）</li>
+</ul>
+</div>
+</div>
+</div></div></div><script type="text/javascript">loadBlogSideColumn();</script></div>
+	
+</div>
+
+<!--done-->
+<div class="footer">
+	Powered by: <a href="http://www.cnblogs.com/">博客园</a>	模板提供：<a href="http://blog.hjenglish.com/">沪江博客</a>
+	Copyright ©2018 凡夫·俗子
+</div>
+
+
+
+
+
+<div class="__read-mode-container__" style="display: none;"></div></body></html>

@@ -8,6 +8,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -20,6 +21,7 @@ namespace AudioAnalysis
 	{
 		PathAnalysis pa=new PathAnalysis();
 		ConfigAnalysis CA=new ConfigAnalysis();
+		List<VideoInfo> v;
 		public MainForm()
 		{
 			//
@@ -41,12 +43,22 @@ namespace AudioAnalysis
 		void BtnOpenFileClick(object sender, EventArgs e)
 		{
 			pa.GetPath();
+			
+			CA.log+= new Action<List<VideoInfo>>(ReFresh1);
+			v= CA.GetVideoInfo(pa.videoRootPath);
 		}
 		void BtnStartClick(object sender, EventArgs e)
 		{
-			List<VideoInfo> v= CA.GetVideoInfo(pa.videoRootPath);
+			
+			
 			CA.WriteList(v);
+			MessageBox.Show("解析成功");
 		}
+		public void ReFresh1(List<VideoInfo> info){
+		 for (int i = 0; i < info.Count; i++) {
+				this.rtbVideoList.AppendText(info[i].videoName+"\n");
+		 }
 		
+		}
 	}
 }

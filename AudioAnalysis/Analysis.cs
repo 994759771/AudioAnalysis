@@ -17,10 +17,10 @@ namespace AudioAnalysis
 	public class Analysis
 	{
 		
-		public event Action<string> log;
+	
 		
-		public void Run(VideoInfo info ,string svaePath){
-			Process p=new Process();
+		public void Run(List<VideoInfo> info ,string svaePath){
+			/*Process p=new Process();
 			p.StartInfo.FileName="ffmpeg.exe";
 			string strCmd="ffmpeg -f concat -i "+info.videoPath+"\\List.txt"+" -c copy "+svaePath+"\\"+info.videoName;
 			p.StartInfo.Arguments=strCmd;
@@ -32,7 +32,7 @@ namespace AudioAnalysis
 			p.BeginErrorReadLine();
 			p.WaitForExit();
 			p.Close();
-			
+			*/
 		}
 		 private void Output(object sendProcess, DataReceivedEventArgs output){
             if (!String.IsNullOrEmpty(output.Data))

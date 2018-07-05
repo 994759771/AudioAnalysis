@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using AudioAnalysis.Mode;
 using System.Collections;
+using AudioAnalysis;
 
 namespace AudioAnalysis
 {
@@ -82,6 +83,7 @@ namespace AudioAnalysis
 	}
 	public class ConfigAnalysis
 	{
+		public   event Action<List<VideoInfo>> log;
 		public List<VideoInfo> GetVideoInfo(string VideoRootPath){
 			
 			List<VideoInfo> VideoInfoList=new List<VideoInfo>();
@@ -97,12 +99,12 @@ namespace AudioAnalysis
 				temp.videoName=me.page_data.part;
 				VideoInfoList.Add(temp);
 			    }
-			  
+				
 			
 			}else{
 				MessageBox.Show("视频路径为空，请先选择","提示");
 			}
-		
+		    log(VideoInfoList);
 			return VideoInfoList;
 		}
 		public void WriteList(List<VideoInfo> videoInfo){
@@ -110,7 +112,7 @@ namespace AudioAnalysis
 				String sb="";
 				StreamWriter sw=null;
 				for (int i = 0; i < videoInfo.Count; i++) {
-					sw=new StreamWriter(videoInfo[i].videoPath+@"\List.txt",true);
+					sw=new StreamWriter(videoInfo[i].videoPath+@"\List.txt");
 					string[] temp=Directory.GetFiles(videoInfo[i].videoPath,"*.blv");
 					IComparer revComparer = new ReverseComparer();
 					Array.Sort(temp,revComparer);

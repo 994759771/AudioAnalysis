@@ -17,7 +17,8 @@ namespace AudioAnalysis
 	public   class PathAnalysis
 	{
 		public   string videoRootPath{get;set;}
-		public  string videoSavePath{get;set;}
+		public   string videoSavePath{get;set;}
+	   	
 		FolderBrowserDialog FBD=new FolderBrowserDialog();
 		
 		public  void GetPath(){
