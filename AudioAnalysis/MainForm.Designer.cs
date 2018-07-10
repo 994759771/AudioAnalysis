@@ -152,6 +152,7 @@ namespace AudioAnalysis
 			this.MinimumSize = new System.Drawing.Size(595, 342);
 			this.Name = "MainForm";
 			this.Text = "bilibili视频合并";
+			this.Load += new System.EventHandler(this.MainFormLoad);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

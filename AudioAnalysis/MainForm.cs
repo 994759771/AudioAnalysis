@@ -22,6 +22,8 @@ namespace AudioAnalysis
 		PathAnalysis pa=new PathAnalysis();
 		ConfigAnalysis CA=new ConfigAnalysis();
 		List<VideoInfo> v;
+		Analysis al=new Analysis();
+		public static RichTextBox rtb;
 		public MainForm()
 		{
 			//
@@ -49,9 +51,9 @@ namespace AudioAnalysis
 		}
 		void BtnStartClick(object sender, EventArgs e)
 		{
-			
-			
-			CA.WriteList(v);
+			Application.DoEvents();
+			al.Run(v,pa.videoSavePath);
+			      
 			MessageBox.Show("解析成功");
 		}
 		public void ReFresh1(List<VideoInfo> info){
@@ -59,6 +61,14 @@ namespace AudioAnalysis
 				this.rtbVideoList.AppendText(info[i].videoName+"\n");
 		 }
 		
+		}
+		void MainFormLoad(object sender, EventArgs e)
+		{
+			rtb=this.rtbLog;
+			al.Updatelog+= new Action<string>(UPdateLog);
+		}
+		void UPdateLog(string a){
+			rtb.AppendText(a);
 		}
 	}
 }
