@@ -24,6 +24,8 @@ namespace AudioAnalysis
 		List<VideoInfo> v;
 		Analysis al=new Analysis();
 		public static RichTextBox rtb;
+		public delegate void Flush(string a);
+		
 		public MainForm()
 		{
 			//
@@ -48,12 +50,14 @@ namespace AudioAnalysis
 			
 			CA.log+= new Action<List<VideoInfo>>(ReFresh1);
 			v= CA.GetVideoInfo(pa.videoRootPath);
+			CA.WriteList(v);
 		}
 		void BtnStartClick(object sender, EventArgs e)
 		{
 			Application.DoEvents();
+			
 			al.Run(v,pa.videoSavePath);
-			      
+			UPdateLog(al.OutLOgTXT);
 			MessageBox.Show("解析成功");
 		}
 		public void ReFresh1(List<VideoInfo> info){
@@ -65,10 +69,12 @@ namespace AudioAnalysis
 		void MainFormLoad(object sender, EventArgs e)
 		{
 			rtb=this.rtbLog;
-			al.Updatelog+= new Action<string>(UPdateLog);
+			
+			
 		}
 		void UPdateLog(string a){
-			rtb.AppendText(a);
+			//rtb.AppendText(a);
+			this.rtbLog.AppendText(a);
 		}
 	}
 }

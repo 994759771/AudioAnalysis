@@ -18,13 +18,18 @@ namespace AudioAnalysis
 	{
 		
 	
-		public event Action<string> Updatelog;
+	    
+		public string OutLOgTXT="";
 		public void Run(List<VideoInfo> info ,string svaePath){
 			
 			for (int i = 0; i < info.Count; i++) {
 		    Process p=new Process();
 			p.StartInfo.FileName="ffmpeg.exe";
-			string strCmd="ffmpeg -f concat -i "+info[i].videoPath+"\\List.txt"+" -c copy "+svaePath+"\\"+info[i].videoName+".flv";
+			string a=info[i].videoName;
+			a+=".flv";
+			a=a.Replace(" ","");
+			string strCmd="ffmpeg  -f  concat -safe 0 -i  "+info[i].videoPath+"\\List.txt"+"  -c:v h264 -c:a mp3 films.flv";
+			strCmd=strCmd.TrimEnd();
 			p.StartInfo.Arguments=strCmd;
 			p.StartInfo.UseShellExecute=false;
 			p.StartInfo.RedirectStandardError=true;
@@ -32,6 +37,7 @@ namespace AudioAnalysis
 			p.ErrorDataReceived+= new DataReceivedEventHandler(Output);
 			p.Start();
 			p.BeginErrorReadLine();
+			 
 			p.WaitForExit();
 			p.Close();
 			
@@ -43,7 +49,9 @@ namespace AudioAnalysis
 		 private void Output(object sendProcess, DataReceivedEventArgs output){
             if (!String.IsNullOrEmpty(output.Data))
             {
-            	Updatelog(output.Data.ToString());
+            	
+            	OutLOgTXT+=output.Data.ToString();
+            	//bb(output.Data.ToString());
             	//MainForm.rtb.AppendText(output.Data.ToString());
             }
         }

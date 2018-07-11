@@ -113,15 +113,16 @@ namespace AudioAnalysis
 				StreamWriter sw=null;
 				for (int i = 0; i < videoInfo.Count; i++) {
 					sw=new StreamWriter(videoInfo[i].videoPath+@"\List.txt");
-					string[] temp=Directory.GetFiles(videoInfo[i].videoPath,"*.blv");
+					string[] temp=Directory.GetFiles(videoInfo[i].videoPath,"*.flv");
 					IComparer revComparer = new ReverseComparer();
 					Array.Sort(temp,revComparer);
 					for (int j = 0; j < temp.Length; j++) {
-						sb="file '"+temp[j].ToString()+" '\n";
+						sb="file '"+temp[j].ToString()+"'\n";
 					    sw.WriteLine(sb);
 					}
 				
 					sw.Close();
+					sw.Dispose();
 					
 				}
 				
